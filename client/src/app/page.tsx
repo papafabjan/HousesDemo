@@ -1,6 +1,6 @@
 "use client";
 
-import Spinner from "../app/components/Spinner";
+import Spinner from "./components/Spinner";
 import HouseCard from "./components/HouseCard";
 import { useEffect, useState } from "react";
 
@@ -13,7 +13,7 @@ const verdana = localFont({
 interface DataItem {
   id: string;
   name: string;
-  houseColours: string;
+  housecolours: string;
   founder: string;
   animal: string;
   element: string;
@@ -27,21 +27,18 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [data, setData] = useState<DataItem[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
+  const APP_SERVER = "https://71ae-62-74-3-90.ngrok-free.app";
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(
-          "https://2b3d-62-74-3-90.ngrok-free.app//houses",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ name: searchTerm }),
-          }
-        );
+        const response = await fetch(`${APP_SERVER}/houses`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: searchTerm }),
+        });
 
         const responseData = await response.json();
         if (response.ok) {
@@ -57,12 +54,11 @@ export default function Home() {
 
     const timeoutId = setTimeout(fetchData, 300);
 
-    return () => clearTimeout(timeoutId); 
+    return () => clearTimeout(timeoutId);
   }, [searchTerm]);
 
   console.log("Current data state:", data);
   console.log("isloading:", isLoading);
-
 
   return (
     <>
@@ -85,7 +81,7 @@ export default function Home() {
                   name={item.name}
                   animal={item.animal}
                   founder={item.founder}
-                  houseColours={item.houseColours}
+                  housecolours={item.housecolours}
                 />
               ))
             ) : (

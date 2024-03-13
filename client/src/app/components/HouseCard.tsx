@@ -4,14 +4,14 @@ interface HouseCardProps {
   name: string;
   animal: string;
   founder: string;
-  houseColours: string;
+  housecolours: string;
 }
 
 const HouseCard: React.FC<HouseCardProps> = ({
   name,
   animal,
   founder,
-  houseColours,
+  housecolours,
 }) => {
   const validCSSColorsSet: Set<string> = new Set([
     "black",
@@ -32,10 +32,12 @@ const HouseCard: React.FC<HouseCardProps> = ({
     "aqua",
   ]);
 
-  const renderGradientBar = (houseColours: string) => {
+  const renderGradientBar = (housecolours: string) => {
     let gradientStyle: React.CSSProperties;
-    if (houseColours) {
-      const colors = houseColours
+    console.log("Hello");
+    console.log(housecolours);
+    if (housecolours) {
+      const colors = housecolours
         .split(" and ")
         .map((color) => color.trim().toLowerCase());
       const color1 = validCSSColorsSet.has(colors[0]) ? colors[0] : "white";
@@ -66,7 +68,7 @@ const HouseCard: React.FC<HouseCardProps> = ({
           <h2 className="text-lg font-semibold mr-auto">{name}</h2>
           <p className="text-sm text-black">{animal}</p>
         </div>
-        <div className="w-full" style={renderGradientBar(houseColours)}></div>
+        <div className="w-full" style={renderGradientBar(housecolours)}></div>
         <p className="text-sm text-black">
           Founder: <span className="font-bold">{founder}</span>
         </p>

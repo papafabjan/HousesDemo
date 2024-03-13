@@ -32,13 +32,16 @@ export default function Home() {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("http://localhost:5000/houses", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name: searchTerm }),
-        });
+        const response = await fetch(
+          "https://2b3d-62-74-3-90.ngrok-free.app//houses",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name: searchTerm }),
+          }
+        );
 
         const responseData = await response.json();
         if (response.ok) {
